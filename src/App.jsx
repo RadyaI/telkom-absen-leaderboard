@@ -8,9 +8,9 @@ import person from './assets/person.svg'
 export default function App() {
 
   const [userData, setUserData] = useState([
-    {nama: 'Loading', nama_kelas: 'Loading', kelompok: 'Loading', jam: 'Loading'},
-    {nama: 'Loading', nama_kelas: 'Loading', kelompok: 'Loading', jam: 'Loading'},
-    {nama: 'Loading', nama_kelas: 'Loading', kelompok: 'Loading', jam: 'Loading'},
+    { nama: 'Loading', nama_kelas: 'Loading', kelompok: 'Loading', jam: 'Loading', foto_smk: 'Loading' },
+    { nama: 'Loading', nama_kelas: 'Loading', kelompok: 'Loading', jam: 'Loading', foto_smk: 'Loading' },
+    { nama: 'Loading', nama_kelas: 'Loading', kelompok: 'Loading', jam: 'Loading', foto_smk: 'Loading' },
   ])
 
 
@@ -18,6 +18,7 @@ export default function App() {
     axios.get('https://siswa.smktelkom-mlg.sch.id/Thefirst_siswa/tm_thefirst').then(
       (res) => {
         setUserData(res.data)
+        console.log(res)
       }
     )
   }, [])
@@ -51,13 +52,13 @@ export default function App() {
     <Container>
       <Card className="card">
         <Top3>
-          <div className="user"><img src={person} alt="user" /></div>
-          <div className="user"><img src={person} alt="" /></div>
-          <div className="user"><img src={person} alt="" /></div>
+          <div className="user">{userData[1] && (<img src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[1].foto_smk !== "" ? userData[1].foto_smk : "user.png"}`} alt="user" />)}</div>
+          <div className="user">{userData[0] && (<img src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[0].foto_smk !== "" ? userData[0].foto_smk : "user.png"}`} alt="" />)}</div>
+          <div className="user">{userData[2] && (<img src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[2].foto_smk !== "" ? userData[2].foto_smk : "user.png"}`} alt="" />)}</div>
           <div className="name">
-            <div className="l">{userData[1] ? userData[1].nama : "" } | {userData[1] ? userData[1].nama_kelas : ""} {userData[1] ? userData[1].kelompok : ""}</div>
-            <div className="l"> {userData[0] ? userData[0].nama : "" } | {userData[0] ? userData[0].nama_kelas : ""} {userData[0] ? userData[0].kelompok : ""}</div>
-            <div className="l"> {userData[2] ? userData[2].nama : "" } | {userData[2] ? userData[2].nama_kelas : ""} {userData[2] ? userData[2].kelompok : ""}</div>
+            <div className="l"> {userData[1] ? userData[1].nama + " |" : ""} {userData[1] ? userData[1].nama_kelas : ""} {userData[1] ? userData[1].kelompok : ""}</div>
+            <div className="l"> {userData[0] ? userData[0].nama + " |" : ""} {userData[0] ? userData[0].nama_kelas : ""} {userData[0] ? userData[0].kelompok : ""}</div>
+            <div className="l"> {userData[2] ? userData[2].nama + " |" : ""} {userData[2] ? userData[2].nama_kelas : ""} {userData[2] ? userData[2].kelompok : ""}</div>
           </div>
         </Top3>
         <Other>
