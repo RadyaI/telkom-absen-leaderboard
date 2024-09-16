@@ -32,7 +32,7 @@ export default function App() {
     const display = filtered.map((i, index) =>
       <div className="card" key={index}>
         <div className="user">
-          <div className="img-container"> <img src={person} alt="user" /> </div>
+          <div className="img-container"> <img src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${i.foto_smk !== "" ? i.foto_smk : "user.png"}`} alt="user" /> </div>
           <div className="user-info">
             {i.nama} | {i.nama_kelas} {i.kelompok} <br />
             <small>{i.jam}</small>
