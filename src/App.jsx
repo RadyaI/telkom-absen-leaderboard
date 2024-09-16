@@ -7,34 +7,38 @@ import person from './assets/person.svg'
 
 export default function App() {
 
-  const [userData, setUserData] = useState(
-    [
-      { number: 1, nama_siswa: "Muhammad Radya", kelas: "XII RPL 1", time: "04:54" },
-      { number: 2, nama_siswa: "Muhammad Fulan", kelas: "XII RPL 2", time: "04:55" }
-    ]
-  )
+  const [userData, setUserData] = useState([
+    {nama: 'Loading', nama_kelas: 'Loading', kelompok: 'Loading', jam: 'Loading'},
+    {nama: 'Loading', nama_kelas: 'Loading', kelompok: 'Loading', jam: 'Loading'},
+    {nama: 'Loading', nama_kelas: 'Loading', kelompok: 'Loading', jam: 'Loading'},
+  ])
 
 
   useEffect(() => {
     axios.get('https://siswa.smktelkom-mlg.sch.id/Thefirst_siswa/tm_thefirst').then(
       (res) => {
-          console.log(res)
+        setUserData(res.data)
       }
     )
   }, [])
 
   function Data() {
-    const display = userData.map((i, index) =>
+
+    let filtered = userData
+
+    filtered = filtered.slice(3, 100)
+
+    const display = filtered.map((i, index) =>
       <div className="card" key={index}>
         <div className="user">
           <div className="img-container"> <img src={person} alt="user" /> </div>
           <div className="user-info">
-            {i.nama_siswa} | {i.kelas} <br />
-            <small>{i.time}</small>
+            {i.nama} | {i.nama_kelas} {i.kelompok} <br />
+            <small>{i.jam}</small>
           </div>
         </div>
         <div className="number">
-          <div className="top">{i.number}</div>
+          {/* <div className="top">{index + 1}</div> */}
         </div>
       </div>
     )
@@ -51,9 +55,9 @@ export default function App() {
           <div className="user"><img src={person} alt="" /></div>
           <div className="user"><img src={person} alt="" /></div>
           <div className="name">
-            <div className="1">Muhammad Radya I | XII RPL 2</div>
-            <div className="1">Muhammad Radya I | XII RPL 2</div>
-            <div className="1">Muhammad Radya I | XII RPL 2</div>
+            <div className="l">{userData[0] ? userData[0].nama : "" } | {userData[0] ? userData[0].nama_kelas : ""} {userData[0] ? userData[0].kelompok : ""}</div>
+            <div className="l"> {userData[1] ? userData[1].nama : "" } | {userData[1] ? userData[1].nama_kelas : ""} {userData[1] ? userData[1].kelompok : ""}</div>
+            <div className="l"> {userData[2] ? userData[2].nama : "" } | {userData[2] ? userData[2].nama_kelas : ""} {userData[2] ? userData[2].kelompok : ""}</div>
           </div>
         </Top3>
         <Other>
@@ -108,6 +112,13 @@ const Top3 = styled.div`
     align-items: center;
     font-weight: bold;
     color: #FFF6E9;
+  }
+
+  .name .l{
+    width: 30%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .user img{
