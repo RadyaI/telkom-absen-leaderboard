@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 
-import person from './assets/person.svg'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
 
 export default function App() {
@@ -12,6 +12,9 @@ export default function App() {
     { nama: 'Loading', nama_kelas: 'Loading', kelompok: 'Loading', jam: 'Loading', foto_smk: 'Loading' },
     { nama: 'Loading', nama_kelas: 'Loading', kelompok: 'Loading', jam: 'Loading', foto_smk: 'Loading' },
   ])
+
+  const [toggleInput, setToggleInput] = useState(false)
+  const [search, setSearch] = useState('')
 
 
   useEffect(() => {
@@ -28,6 +31,7 @@ export default function App() {
     let filtered = userData
 
     filtered = filtered.slice(3, 100)
+    filtered = filtered.filter(i => i.nama.toLowerCase().includes(search.toLowerCase()))
 
     const display = filtered.map((i, index) =>
       <div className="card" key={index}>
@@ -49,25 +53,74 @@ export default function App() {
 
 
   return (
-    <Container>
-      <Card className="card">
-        <Top3>
-          <div className="user">{userData[1] && (<img loading="lazy" src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[1].foto_smk !== "" ? userData[1].foto_smk : "user.png"}`} alt="user" />)}</div>
-          <div className="user">{userData[0] && (<img loading="lazy" src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[0].foto_smk !== "" ? userData[0].foto_smk : "user.png"}`} alt="" />)}</div>
-          <div className="user">{userData[2] && (<img loading="lazy" src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[2].foto_smk !== "" ? userData[2].foto_smk : "user.png"}`} alt="" />)}</div>
-          <div className="name">
-            <div className="l"> {userData[1] ? userData[1].nama + " |" : ""} {userData[1] ? userData[1].nama_kelas : ""} {userData[1] ? userData[1].kelompok : ""}</div>
-            <div className="l"> {userData[0] ? userData[0].nama + " |" : ""} {userData[0] ? userData[0].nama_kelas : ""} {userData[0] ? userData[0].kelompok : ""}</div>
-            <div className="l"> {userData[2] ? userData[2].nama + " |" : ""} {userData[2] ? userData[2].nama_kelas : ""} {userData[2] ? userData[2].kelompok : ""}</div>
-          </div>
-        </Top3>
-        <Other>
-          <Data></Data>
-        </Other>
-      </Card>
-    </Container>
+    <>
+      <Search onClick={() => setToggleInput(!toggleInput)}><i className="bi bi-search"></i></Search>
+      <Container>
+        {toggleInput && (<Input><input type="text" placeholder="Cari siswa..." onChange={(e) => setSearch(e.target.value)} /></Input>)}
+        <Card className="card" onClick={() => setToggleInput(false)}>
+          <Top3 className={`${toggleInput ? 'blur' : ''}`}>
+            <div className="user">{userData[1] && (<img loading="lazy" src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[1].foto_smk !== "" ? userData[1].foto_smk : "user.png"}`} alt="user" />)}</div>
+            <div className="user">{userData[0] && (<img loading="lazy" src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[0].foto_smk !== "" ? userData[0].foto_smk : "user.png"}`} alt="" />)}</div>
+            <div className="user">{userData[2] && (<img loading="lazy" src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[2].foto_smk !== "" ? userData[2].foto_smk : "user.png"}`} alt="" />)}</div>
+            <div className="name">
+              <div className="l"> {userData[1] ? userData[1].nama + " |" : ""} {userData[1] ? userData[1].nama_kelas : ""} {userData[1] ? userData[1].kelompok : ""}</div>
+              <div className="l"> {userData[0] ? userData[0].nama + " |" : ""} {userData[0] ? userData[0].nama_kelas : ""} {userData[0] ? userData[0].kelompok : ""}</div>
+              <div className="l"> {userData[2] ? userData[2].nama + " |" : ""} {userData[2] ? userData[2].nama_kelas : ""} {userData[2] ? userData[2].kelompok : ""}</div>
+            </div>
+          </Top3>
+          <Other>
+            <Data></Data>
+          </Other>
+        </Card>
+      </Container>
+    </>
   )
 }
+
+const Search = styled.div`
+  border-radius: 50%;
+  background-color: #FF7F3E;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  color: #FFF6E9;
+  cursor: pointer;
+
+  @media only screen and (max-width:700px){
+    display: none;
+  }
+`
+const appear = keyframes`
+  from{width: 0;}
+  to{width: 50%;}
+`
+
+const Input = styled.div`
+  z-index: 2;
+  position: absolute;
+  top: 100px;
+  width: 50%;
+  height: 60px;
+  background-color: #FFF6E9;
+  border-radius: 10px;
+  animation: ${appear} 0.3s linear;
+
+  input{
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 17px;
+    padding: 0 15px;
+    width: 90%;
+    height: 100%;
+  }
+`
 
 const Container = styled.div`
     background-color: #FFF6E9;
