@@ -32,7 +32,7 @@ export default function App() {
     const display = filtered.map((i, index) =>
       <div className="card" key={index}>
         <div className="user">
-          <div className="img-container"> <img src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${i.foto_smk !== "" ? i.foto_smk : "user.png"}`} alt="user" /> </div>
+          <div className="img-container"> <img loading="lazy" src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${i.foto_smk !== "" ? i.foto_smk : "user.png"}`} alt="user" /> </div>
           <div className="user-info">
             {i.nama} | {i.nama_kelas} {i.kelompok} <br />
             <small>{i.jam}</small>
@@ -52,9 +52,9 @@ export default function App() {
     <Container>
       <Card className="card">
         <Top3>
-          <div className="user">{userData[1] && (<img src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[1].foto_smk !== "" ? userData[1].foto_smk : "user.png"}`} alt="user" />)}</div>
-          <div className="user">{userData[0] && (<img src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[0].foto_smk !== "" ? userData[0].foto_smk : "user.png"}`} alt="" />)}</div>
-          <div className="user">{userData[2] && (<img src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[2].foto_smk !== "" ? userData[2].foto_smk : "user.png"}`} alt="" />)}</div>
+          <div className="user">{userData[1] && (<img loading="lazy" src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[1].foto_smk !== "" ? userData[1].foto_smk : "user.png"}`} alt="user" />)}</div>
+          <div className="user">{userData[0] && (<img loading="lazy" src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[0].foto_smk !== "" ? userData[0].foto_smk : "user.png"}`} alt="" />)}</div>
+          <div className="user">{userData[2] && (<img loading="lazy" src={`https://siswa.smktelkom-mlg.sch.id/assets/images/foto_siswa/${userData[2].foto_smk !== "" ? userData[2].foto_smk : "user.png"}`} alt="" />)}</div>
           <div className="name">
             <div className="l"> {userData[1] ? userData[1].nama + " |" : ""} {userData[1] ? userData[1].nama_kelas : ""} {userData[1] ? userData[1].kelompok : ""}</div>
             <div className="l"> {userData[0] ? userData[0].nama + " |" : ""} {userData[0] ? userData[0].nama_kelas : ""} {userData[0] ? userData[0].kelompok : ""}</div>
