@@ -55,8 +55,8 @@ export default function App() {
           <div className="user"><img src={person} alt="" /></div>
           <div className="user"><img src={person} alt="" /></div>
           <div className="name">
-            <div className="l">{userData[0] ? userData[0].nama : "" } | {userData[0] ? userData[0].nama_kelas : ""} {userData[0] ? userData[0].kelompok : ""}</div>
-            <div className="l"> {userData[1] ? userData[1].nama : "" } | {userData[1] ? userData[1].nama_kelas : ""} {userData[1] ? userData[1].kelompok : ""}</div>
+            <div className="l">{userData[1] ? userData[1].nama : "" } | {userData[1] ? userData[1].nama_kelas : ""} {userData[1] ? userData[1].kelompok : ""}</div>
+            <div className="l"> {userData[0] ? userData[0].nama : "" } | {userData[0] ? userData[0].nama_kelas : ""} {userData[0] ? userData[0].kelompok : ""}</div>
             <div className="l"> {userData[2] ? userData[2].nama : "" } | {userData[2] ? userData[2].nama_kelas : ""} {userData[2] ? userData[2].kelompok : ""}</div>
           </div>
         </Top3>
@@ -116,9 +116,9 @@ const Top3 = styled.div`
 
   .name .l{
     width: 30%;
-    overflow: hidden;
+    /* overflow: hidden; */
     text-overflow: ellipsis;
-    white-space: nowrap;
+    /* white-space: nowrap; */
   }
 
   .user img{
