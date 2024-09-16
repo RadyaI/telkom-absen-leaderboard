@@ -135,6 +135,7 @@ const Top3 = styled.div`
 
   @media only screen and (max-width:700px){
     height: 30%;
+    font-size: 10px;
 
     .user{
       width: 60px;
@@ -168,12 +169,16 @@ const Other = styled.div`
 
 
   .card .user{
-    width: 50%;
+    width: 80%;
     height: 100%;
     display: flex;
     align-items: center;
     gap: 10px;
     font-weight: bold;
+  }
+
+  .card .user .user-info{
+    width: 100%;
   }
 
   .card .user .img-container{
@@ -191,7 +196,7 @@ const Other = styled.div`
   }
 
   .card .number{
-    width: 50%;
+    width: 20%;
     height: 100%;
     display: flex;
     justify-content: flex-end;
@@ -207,5 +212,11 @@ const Other = styled.div`
     align-items: center;
     font-size: 20px;
     font-weight: bold;
+  }
+
+  @media only screen and (max-width:700px){
+    .card .user{
+      font-size: 10px;
+    }
   }
 `
